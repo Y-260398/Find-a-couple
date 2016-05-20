@@ -9,6 +9,7 @@ import sys
 x=750
 y=500
 
+
 size=(x,y)
 black=(0,0,0)
 white=(255,255,255)

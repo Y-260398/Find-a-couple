@@ -2,7 +2,7 @@
 import pygame, sys
 import os
 
-from pygame.locals  import *
+
 
 pygame.font.init()
 
@@ -14,8 +14,6 @@ my=[]
 
 xx=(750)
 yy=(500)
-
-f=open('testRandomv.2.py', 'r')
 
 x1=(90)
 y1=(90)
@@ -65,9 +63,7 @@ while not done:     #основной цикл программы
 	DrawText('Info', font, image, x2, y2)
 	DrawText('Exit', font, image, x3, y3)
 
-    if mx != x1 and my != y1:
-        f=open('testRandomv.2.py', 'r')
-        # sys.exit()
+
 
 
 

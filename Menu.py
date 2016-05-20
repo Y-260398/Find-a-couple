@@ -1,47 +1,55 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
-# quitbutton.py
+import pygame, sys
+import os
 
-import sys
-from PyQt4 import QtGui, QtCore
-class MainWindow(QtGui.QMainWindow):
-     def __init__(self):
+pygame.font.init()
 
-
-      QtGui.QWidget.__init__(self, parent=None)
-      self.setGeometry(400,100, 650, 600)
-      self.setWindowTitle('32KGame')
-
-      quit = QtGui.QPushButton(u'Close', self)
-      quit.setGeometry(260, 400, 150, 100)           #1.X 2.Y 3.Len 4.size
-      self.connect(quit, QtCore.SIGNAL('clicked()'),
-          QtGui.qApp, QtCore.SLOT('quit()'))
-
-      open = QtGui.QPushButton(u"Start",self)
-      open.setGeometry(260, 10, 150, 100)
-      self.connect(open, QtCore.SIGNAL('clicked()'),
-         QtGui.qApp, QtCore.SLOT('start()'))
-
-
-      options = QtGui.QPushButton(u"Options",self)
-      options.setGeometry(260, 140, 150, 100)
-      self.connect(options, QtCore.SIGNAL('clicked()'),
-         QtGui.qApp, QtCore.SLOT('Options()'))
-
-      faq = QtGui.QPushButton(u"Options",self)
-      faq.setGeometry(260, 270, 150, 100)
-      self.connect(faq, QtCore.SIGNAL('clicked()'),
-         QtGui.qApp, QtCore.SLOT('FAQ()'))
+done=False
+clock=pygame.time.Clock()
 
 
 
 
+font_color = (255, 255, 153)
+highlite_color = (153, 102, 255)
+font = pygame.font.Font(None, 72)
+surface_width = 800
+surface_height = 600
 
-app = QtGui.QApplication(sys.argv)
-qb = MainWindow()
-qb.show()
-sys.exit(app.exec_())
+surface_menu = pygame.display.set_mode([surface_width,surface_height])
+
+pygame.display.set_caption("Test")
+
+
+
+image = pygame.image.load ("t.jpg").convert_alpha()
+
+
+def DrawText(text, font, surface_menu, x, y, selected = False):
+    	textobj = font.render(text, 1, font_color)
+    	textrect = textobj.get_rect()
+    	textrect.topleft = (x, y)
+    	if selected:
+    	    highlight = pygame.Surface((len(text) * 33, 65))
+    	    highlight.fill(highlite_color)
+    	    surface_menu.blit(highlight, [x - 18, y - 15])
+    	surface_menu.blit(textobj, textrect)
+while not done:     #основной цикл программы
+    for event in pygame.event.get():
+        if event.type==pygame.QUIT:
+            done = True
+
+
+	DrawText('Start', font, image, (surface_width/5)-65, (surface_height/2)-110, True)
+	DrawText('Options', font, image, (surface_width/5)-65, (surface_height/2)-40)
+	DrawText('Quit', font, image, (surface_width/5)-65, (surface_height/2)+30)
 
 
 
 
+
+    surface_menu.blit(image, (0,0))
+    pygame.display.update()
+    pygame.display.flip()     #obnova ekrana
+
+pygame.display.update()
